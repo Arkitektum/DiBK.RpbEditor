@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
@@ -53,4 +54,4 @@ jobs:
         app-name: 'dibk-rpb-editor'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_f12a9035d3fc4407a372ad3f4b5c226e }}
-        package: .
+        package: build
