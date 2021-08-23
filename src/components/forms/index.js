@@ -1,0 +1,9 @@
+export { default as Fellesbestemmelser } from './Fellesbestemmelser/Fellesbestemmelser';
+export { default as Formålsbestemmelser } from './Formålsbestemmelser/Formålsbestemmelser';
+export { default as Generelt } from './Generelt/Generelt';
+export { default as Hensynsbestemmelser } from './Hensynsbestemmelser/Hensynsbestemmelser';
+export { default as KravOmDetaljregulering } from './KravOmDetaljregulering/KravOmDetaljregulering';
+export { default as Områdebestemmelser } from './Områdebestemmelser/Områdebestemmelser';
+export { default as Planhensikt } from './Planhensikt/Planhensikt';
+export { default as Rekkefølgebestemmelser } from './Rekkefølgebestemmelser/Rekkefølgebestemmelser';
+export { default as JuridiskeDokumenter } from './JuridiskeDokumenter/JuridiskeDokumenter';

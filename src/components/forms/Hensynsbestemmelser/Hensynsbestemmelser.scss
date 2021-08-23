@@ -1,0 +1,9 @@
+.hensynsbestemmelse-dialog {
+   .modal-footer .button-group > button {
+      margin-left: 15px;
+   }
+
+   &.edit-mode .modal-footer {
+      justify-content: space-between;
+   }
+}
