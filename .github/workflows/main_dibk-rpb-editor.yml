@@ -35,5 +35,5 @@ jobs:
         app-name: dibk-rpb-editor
         slot-name: Production
         publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_654BBB0BB4F34AA288D236BED6FD84B9 }}
-        package: .
+        package: build
 
