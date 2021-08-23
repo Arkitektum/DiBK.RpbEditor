@@ -14,7 +14,7 @@ import Logo from './assets/gfx/logo-dibk.svg';
 import './App.scss';
 
 const CODE_LISTS_URL = process.env.REACT_APP_CODE_LISTS_URL;
-const SAVE_DOC_INTVAL_SEC = 30;
+const SAVE_DOC_INTVAL_SEC = 15;
 
 export const CodeListContext = createContext({});
 
