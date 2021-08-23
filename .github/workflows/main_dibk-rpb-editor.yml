@@ -14,8 +14,7 @@ jobs:
     steps:
     # checkout the repo
     - name: 'Checkout Github Action'
-      uses: actions/checkout@master
-
+      uses: actions/checkout@v2
 
     - name: Set up Node.js version
       uses: actions/setup-node@v1
@@ -30,7 +29,7 @@ jobs:
     - name: Run Azure webapp deploy action using publish profile credentials
       uses: azure/webapps-deploy@v2
       with:
-        app-name: dibk-ftpb-broop-frontend
-        slot-name: Production
+        app-name: dibk-rpb-editor
+        slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_37a9bb6cd1dd439698f9be1e945cb96b  }}
         package: build
