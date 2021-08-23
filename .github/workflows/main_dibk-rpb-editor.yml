@@ -4,8 +4,10 @@
 name: Build and deploy Node.js app to Azure Web App - dibk-rpb-editor
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
