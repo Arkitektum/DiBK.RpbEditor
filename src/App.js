@@ -1,10 +1,8 @@
-import { useCallback, useEffect, useReducer, useState, createContext } from 'react';
-import { Provider } from 'react-redux';
+import React, { useCallback, useEffect, useReducer, useState, createContext } from 'react';
+import { useSelector } from 'react-redux';
 import { enhancedReducer, formUpdated, initialState } from './utils/form';
 import { useInterval } from 'utils/hooks';
-import store from 'store';
-import Tabs from 'react-bootstrap/Tabs';
-import Tab from 'react-bootstrap/Tab';
+import { Spinner, Tab, Tabs } from 'react-bootstrap';
 import { Fellesbestemmelser, Generelt, Planhensikt, KravOmDetaljregulering, Formålsbestemmelser, Hensynsbestemmelser, Områdebestemmelser, Rekkefølgebestemmelser, JuridiskeDokumenter } from 'components/forms';
 import { ActionButtons } from 'components/partials';
 import { Dialog } from 'components/custom-elements';
@@ -22,6 +20,7 @@ const App = () => {
    const [codeLists, setCodeLists] = useState(null);
    const [state, updateState] = useReducer(enhancedReducer, initialState);
    const updateForm = useCallback(event => formUpdated(event, updateState), []);
+   const apiLoading = useSelector(state => state.api.loading);
 
    useEffect(() => {
       get('rpb-document')
@@ -48,13 +47,18 @@ const App = () => {
    }
 
    return (
-      <Provider store={store}>
+      <React.Fragment>
          <CodeListContext.Provider value={codeLists}>
             <div className='App'>
                <div className="container">
                   <header>
                      <h1>
                         <img src={Logo} alt="DiBK" />Fellestjenester PLAN |<span>Reguleringsplanbestemmelser</span>
+                        {
+                           apiLoading ?
+                              <Spinner animation="border" /> :
+                              ''
+                        }
                      </h1>
                   </header>
 
@@ -96,7 +100,7 @@ const App = () => {
          </CodeListContext.Provider>
 
          <Dialog />
-      </Provider>
+      </React.Fragment>
    );
 }
 
