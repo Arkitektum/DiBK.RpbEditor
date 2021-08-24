@@ -133,7 +133,7 @@ const Hensynsbestemmelser = ({ state, onChange }) => {
                   <Button variant="secondary" onClick={closeBestemmelse}>
                      Avbryt
                   </Button>
-                  <Button variant="primary" onClick={saveBestemmelse} disabled={newState.nummerering === '' || newState.overskrift === ''}>
+                  <Button variant="primary" onClick={saveBestemmelse}>
                      Lagre
                   </Button>
                </div>
