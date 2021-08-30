@@ -58,9 +58,12 @@ const ActionButtons = ({ state, onFormChange }) => {
 
       if (data) {
          const tab = window.open('about:blank');
-         tab.document.open();
-         tab.document.write(data);
-         tab.document.close();
+
+         if (tab !== null) {
+            tab.document.open();
+            tab.document.write(data);
+            tab.document.close();
+         }
       }
    };
 
