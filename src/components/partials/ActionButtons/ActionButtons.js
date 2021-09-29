@@ -103,15 +103,6 @@ function ActionButtons({ state, onFormChange }) {
       }
    }
 
-   function exportToJson() {
-      const json = jsonFormat(state);
-
-      if (json) {
-         const blob = new Blob([json], { type: 'application/json; charset=utf-8' });
-         saveAs(blob, `planbestemmelser-${dayjs().format('YYYYMMDDTHHmmss')}.json`);
-      }
-   };
-
    async function exportToHtml() {
       const data = await sendAsync(TO_HTML_URL, state);
 
@@ -131,6 +122,15 @@ function ActionButtons({ state, onFormChange }) {
 
       if (pdfDoc) {
          saveAs(pdfDoc, `planbestemmelser-${dayjs().format('YYYYMMDDTHHmmss')}.pdf`);
+      }
+   };
+   
+   function exportToJson() {
+      const json = jsonFormat(state);
+
+      if (json) {
+         const blob = new Blob([json], { type: 'application/json; charset=utf-8' });
+         saveAs(blob, `planbestemmelser-${dayjs().format('YYYYMMDDTHHmmss')}.json`);
       }
    };
 
