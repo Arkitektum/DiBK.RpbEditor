@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import App from './App';
 import { registerLocale, setDefaultLocale } from 'react-datepicker';
 import nb from 'date-fns/locale/nb';
@@ -7,7 +8,6 @@ import store from 'store';
 import './utils/tinymce-bootstrapper';
 import './utils/mutation-observer';
 import './index.scss';
-import { Provider } from 'react-redux';
 
 registerLocale('nb', nb);
 setDefaultLocale('nb');

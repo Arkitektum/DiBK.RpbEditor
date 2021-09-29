@@ -56,6 +56,12 @@
 .action-buttons {
    display: flex;
    justify-content: flex-end;
+   position: relative;
+
+   .last-saved {
+      position: absolute;
+      top: -30px;
+   }
 
    button {
       border-radius: 0;

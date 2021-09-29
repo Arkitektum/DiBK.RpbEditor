@@ -23,8 +23,9 @@ const TagItem = ({ tag, isLastIndex, backspacePressedCount, handleOnRemoveTag, t
 }
 
 const tagsListReducer = (state, action) => {
-   const { type, value } = action
-   let newState = [...state]
+   const { type, value } = action;
+   let newState = [...state];
+
    if (type === 'ADD_TAG' && value) {
       newState.push(value)
    } else if (type === 'REMOVE_TAG') {
@@ -34,7 +35,8 @@ const tagsListReducer = (state, action) => {
          newState = [...value]
       }
    }
-   return newState
+
+   return newState;
 }
 
 const TagsInput = ({ tags, placeholder, onChange, tagClassName }) => {
@@ -63,6 +65,7 @@ const TagsInput = ({ tags, placeholder, onChange, tagClassName }) => {
 
    const handleOnKeyDown = (event) => {
       const { key } = event
+
       if (key === 'Enter' && tagsList.indexOf(tagInputValue) === -1) {
          setTagsList({ type: 'ADD_TAG', value: tagInputValue })
          setTagInputValue('')

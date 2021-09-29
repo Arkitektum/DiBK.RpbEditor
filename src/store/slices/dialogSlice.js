@@ -20,8 +20,8 @@ export const dialogSlice = createSlice({
          Object.assign(state, initialState);
       }
    }
-})
+});
 
-export const { showDialog, hideDialog } = dialogSlice.actions
+export const { showDialog, hideDialog } = dialogSlice.actions;
 
-export default dialogSlice.reducer
+export default dialogSlice.reducer;

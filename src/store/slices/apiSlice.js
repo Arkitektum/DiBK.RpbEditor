@@ -12,8 +12,8 @@ export const apiSlice = createSlice({
          Object.assign(state, action.payload);
       }
    }
-})
+});
 
-export const { toggleLoading } = apiSlice.actions
+export const { toggleLoading } = apiSlice.actions;
 
-export default apiSlice.reducer
+export default apiSlice.reducer;

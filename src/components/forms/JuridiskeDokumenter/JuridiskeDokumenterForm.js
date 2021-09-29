@@ -6,17 +6,17 @@ const JuridiskeDokumenterForm = ({ state, index, onChange }) => {
    return (
       <React.Fragment>
          <div className="row">
-            <div className="col-6">
+            <div className="col-12">
                <Form.Group>
-                  <Form.Label>Tittel</Form.Label>
+                  <Form.Label>Overskrift</Form.Label>
                   <Form.Control type="text" name={`juridiskeDokumenter[${index}].tittel`} value={state.tittel || ''} onChange={onChange} />
                </Form.Group>
             </div>
          </div>         
          <div className="row">
-            <div className="col-6">
+            <div className="col-12">
                <Form.Group>
-                  <Form.Label>Dokumentreferanse</Form.Label>
+                  <Form.Label>Dokumentnavn</Form.Label>
                   <Form.Control type="text" name={`juridiskeDokumenter[${index}].dokumentreferanse`} value={state.dokumentreferanse || ''} onChange={onChange} />
                </Form.Group>
             </div>
@@ -24,7 +24,7 @@ const JuridiskeDokumenterForm = ({ state, index, onChange }) => {
          <div className="row">
             <div className="col">
                <Form.Group>
-                  <Form.Label>Sammendrag</Form.Label>
+                  <Form.Label>Tekst</Form.Label>
                   <TextEditor name={`juridiskeDokumenter[${index}].sammendrag`} value={state.sammendrag || ''} onChange={onChange} />
                </Form.Group>
             </div>

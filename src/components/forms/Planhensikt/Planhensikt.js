@@ -11,7 +11,7 @@ const Planhensikt = ({ state, onChange }) => {
                   <Form.Control type="text" name="planhensikt.nummerering" value={state.planhensikt.nummerering || ''} onChange={onChange} />
                </Form.Group>
             </div>
-            <div className="col-4">
+            <div className="col-10">
                <Form.Group>
                   <Form.Label>Overskrift</Form.Label>
                   <Form.Control type="text" name="planhensikt.overskrift" value={state.planhensikt.overskrift || ''} onChange={onChange} />

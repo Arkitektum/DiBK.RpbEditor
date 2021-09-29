@@ -113,7 +113,7 @@ const Områdebestemmelser = ({ state, onChange }) => {
 
          <Modal show={show} onHide={closeBestemmelse} animation={false} backdrop="static" dialogClassName={`områdebestemmelse-dialog ${openedIndex !== -1 ? 'edit-mode' : ''}`}>
             <Modal.Header closeButton>
-               <Modal.Title>Områdebestemmelse</Modal.Title>
+               <Modal.Title>Bestemmelseområde</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                <OmrådebestemmelseForm state={newState} onChange={updateForm} />

@@ -1,16 +1,16 @@
-import { useContext } from 'react';
-import { CodeListContext } from 'App';
-import { SelectDropdown, Tags, TextEditor } from 'components/custom-elements';
+/*import { useContext } from 'react';
+import { CodeListContext } from 'App';*/
+import { /*SelectDropdown,*/ Tags, TextEditor } from 'components/custom-elements';
 import Form from 'react-bootstrap/Form';
 
 const FormålsbestemmelseForm = ({ state, onChange }) => {
-   const { hovedformål } = useContext(CodeListContext);
+   /*const { hovedformål } = useContext(CodeListContext);
 
    const handleSelect = ({ name, value, label }) => {
       const data = {};
       data[name] = { kodeverdi: value, kodebeskrivelse: label };
       onChange(data);
-   };
+   };*/
 
    return (
       <div className="section">
@@ -21,10 +21,20 @@ const FormålsbestemmelseForm = ({ state, onChange }) => {
                   <Form.Control type="text" name="nummerering" value={state.nummerering || ''} onChange={onChange} />
                </Form.Group>
             </div>
-            <div className="col-4">
+            <div className="col-10">
                <Form.Group>
                   <Form.Label>Overskrift</Form.Label>
                   <Form.Control type="text" name="overskrift" value={state.overskrift || ''} onChange={onChange} />
+               </Form.Group>
+            </div>
+         </div>
+         <div className="row">
+            <div className="col">
+               <Form.Group>
+                  <label className="checkbox">
+                     <input type="checkbox" name="fellesForHovedformål" defaultChecked={state.fellesForHovedformål} value={state.fellesForHovedformål} onChange={onChange} />
+                     <span className="checkmark"></span> Felles for hovedformål
+                  </label>
                </Form.Group>
             </div>
          </div>
@@ -58,26 +68,26 @@ const FormålsbestemmelseForm = ({ state, onChange }) => {
                      <Form.Control type="text" name="alternativReferanse" value={state.alternativReferanse || ''} onChange={onChange} />
                   </Form.Group>
                </div>
+            </div>
+            <div className="row">
+               <div className="col-6">
+                  <Form.Group>
+                     <Form.Label>Gjelder hovedformål</Form.Label>
+                     <SelectDropdown name="gjelderHovedformål" className="selectDropdown" options={hovedformål} value={state.gjelderHovedformål.kodeverdi} onSelect={handleSelect} />
+                  </Form.Group>
+               </div>
+            </div>
+            <div className="row">
+               <div className="col">
+                  <Form.Group>
+                     <label className="checkbox">
+                        <input type="checkbox" name="fellesForHovedformål" defaultChecked={state.fellesForHovedformål} value={state.fellesForHovedformål} onChange={onChange} />
+                        <span className="checkmark"></span> Felles for hovedformål
+                     </label>
+                  </Form.Group>
+               </div>
             </div>*/
          }
-         <div className="row">
-            <div className="col-6">
-               <Form.Group>
-                  <Form.Label>Gjelder hovedformål</Form.Label>
-                  <SelectDropdown name="gjelderHovedformål" className="selectDropdown" options={hovedformål} value={state.gjelderHovedformål.kodeverdi} onSelect={handleSelect} />
-               </Form.Group>
-            </div>
-         </div>
-         <div className="row">
-            <div className="col">
-               <Form.Group>
-                  <label className="checkbox">
-                     <input type="checkbox" name="fellesForHovedformål" defaultChecked={state.fellesForHovedformål} value={state.fellesForHovedformål} onChange={onChange} />
-                     <span className="checkmark"></span> Felles for hovedformål
-                  </label>
-               </Form.Group>
-            </div>
-         </div>
          <div className="row">
             <div className="col">
                <Form.Group>
