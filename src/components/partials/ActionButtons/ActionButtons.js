@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useApi } from 'hooks';
+import { useModals } from 'context/ModalsContext';
 import { Button, Dropdown, DropdownButton } from 'react-bootstrap';
-import { ConfirmDialog } from 'components/custom-elements';
 import { ValidationResult } from 'components/partials';
 import { saveAs } from 'file-saver';
 import jsonFormat from 'json-format';
-import { sendAsync } from 'utils/api';
 import { initialState } from 'utils/form';
 import { saveToIdb } from 'utils/idb';
 import dayjs from 'dayjs';
@@ -17,60 +17,60 @@ const TO_PDF_URL = process.env.REACT_APP_TO_PDF_URL;
 const VALIDATE_URL = process.env.REACT_APP_VALIDATE_URL;
 
 function ActionButtons({ state, onFormChange }) {
-   const [importFiles, setImportFiles] = useState([]);
    const [validationRules, setValidationRules] = useState([]);
-   const [showNewDocumentDialog, setShowNewDocumentDialog] = useState(false);
-   const [showImportFileDialog, setShowImportFileDialog] = useState(false);
    const [showValidationDialog, setShowValidationDialog] = useState(false);
+   const { openModal } = useModals();
    const lastSaved = useSelector(state => state.idb.lastSaved);
+   const sendAsync = useApi();
 
-   async function handleOnNewDocumentConfirm() {
-      const initial = { ...initialState };
-      onFormChange(initial);
-      await saveToIdb(initial);
+   function handleNewDocumentClick() {
+      openModal('CONFIRM', {
+         title: 'Nytt dokument',
+         body: 'Er du sikker på at du vil tømme dokumentet og starte på nytt?',
+         okText: 'Ja, start på nytt',
+         onConfirm: async () => {
+            const initial = { ...initialState };
+            onFormChange(initial);
+            await saveToIdb(initial);
+         }
+      });
    }
 
-   function handleOnImportFile(event) {
+   function handleFileUpload(event) {
       const files = Array.from(event.target.files);
       event.target.value = '';
 
       if (!files.length) {
-         setImportFiles([]);
          return;
       }
 
-      setImportFiles(files);
-      setShowImportFileDialog(true);
+      openModal('CONFIRM', {
+         title: 'Importer fil',
+         body: `Er du sikker på at du vil importere filen '${files[0].name}'? Alle dine endringer vil bli overskrevet.`,
+         okText: 'Ja, importer fil',
+         onConfirm: async () => {
+            await importFromFile(files[0]);
+         }
+      });
    }
 
-   async function handleOnImportFileConfirm() {
-      setShowImportFileDialog(false);
-      setImportFiles([]);
-      await importFromFile();
-   }
-
-   function handleOnCloseImportFileDialog() {
-      setShowImportFileDialog(false);
-      setImportFiles([]);
-   }
-
-   async function importFromFile() {
-      switch (importFiles[0].type) {
+   async function importFromFile(file) {
+      switch (file.type) {
          case 'text/xml':
          case 'application/xml':
-            await importFromXml(importFiles);
+            await importFromXml(file);
             break;
          case 'application/json':
-            importFromJson(importFiles);
+            importFromJson(file);
             break;
          default:
             break;
       }
    };
 
-   async function importFromXml(files) {
+   async function importFromXml(file) {
       const formData = new FormData();
-      formData.append('file', files[0]);
+      formData.append('file', file);
 
       const data = await sendAsync(FROM_XML_URL, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
 
@@ -80,7 +80,7 @@ function ActionButtons({ state, onFormChange }) {
       }
    }
 
-   function importFromJson(files) {
+   function importFromJson(file) {
       const fileReader = new FileReader();
 
       fileReader.onload = async event => {
@@ -92,7 +92,7 @@ function ActionButtons({ state, onFormChange }) {
          }
       };
 
-      fileReader.readAsText(files[0]);
+      fileReader.readAsText(file);
    }
 
    async function exportToXml() {
@@ -157,10 +157,10 @@ function ActionButtons({ state, onFormChange }) {
                   null
             }
 
-            <Button variant="primary" onClick={() => setShowNewDocumentDialog(true)}>Nytt dokument</Button>
+            <Button variant="primary" onClick={handleNewDocumentClick}>Nytt dokument</Button>
 
             <label className="import" htmlFor="upload">
-               <input id="upload" type="file" accept=".xml, .json" onChange={handleOnImportFile} />
+               <input id="upload" type="file" accept=".xml, .json" onChange={handleFileUpload} />
                <span>Importér</span>
             </label>
 
@@ -175,25 +175,6 @@ function ActionButtons({ state, onFormChange }) {
          </div>
 
          <ValidationResult show={showValidationDialog} onHide={closeValidationDialog} result={validationRules} />
-
-         <ConfirmDialog
-            show={showNewDocumentDialog}
-            onConfirm={handleOnNewDocumentConfirm}
-            onClose={() => setShowNewDocumentDialog(false)}
-            title="Nytt dokument"
-            body="Er du sikker på at du vil tømme dokumentet og starte på nytt?"
-            okText="Ja, start på nytt"
-         />
-
-         <ConfirmDialog
-            show={showImportFileDialog}
-            onConfirm={handleOnImportFileConfirm}
-            onClose={handleOnCloseImportFileDialog}
-            title="Importer fil"
-            body={importFiles.length ? `Er du sikker på at du vil importere filen '${importFiles[0].name}'? Alle dine endringer vil bli overskrevet.` : ''}
-            okText="Ja, importer fil"
-         />
-
       </React.Fragment>
    );
 }

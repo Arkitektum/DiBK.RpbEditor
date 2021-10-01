@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useReducer, useState, createContext } from 'react';
 import { useSelector } from 'react-redux';
-import { enhancedReducer, formUpdated, initialState } from './utils/form';
-import { useInterval } from 'utils/hooks';
 import { Spinner, Tab, Tabs } from 'react-bootstrap';
+import { ModalsProvider } from 'context/ModalsContext';
+import { enhancedReducer, formUpdated, initialState } from './utils/form';
+import { useApi, useInterval } from 'hooks';
 import { Fellesbestemmelser, Generelt, Planhensikt, KravOmDetaljregulering, Formålsbestemmelser, Hensynsbestemmelser, Områdebestemmelser, Rekkefølgebestemmelser, JuridiskeDokumenter } from 'components/forms';
 import { ActionButtons } from 'components/partials';
-import { Dialog } from 'components/custom-elements';
-import { sendAsync } from 'utils/api';
+import modals from 'components/modals/modals';
 import { saveToIdb, loadFromIdb } from 'utils/idb';
 import Logo from './assets/gfx/logo-dibk.svg';
 import './App.scss';
@@ -20,6 +20,7 @@ const App = () => {
    const [codeLists, setCodeLists] = useState(null);
    const [state, updateState] = useReducer(enhancedReducer, initialState);
    const updateForm = useCallback(event => formUpdated(event, updateState), []);
+   const sendAsync = useApi();
    const apiLoading = useSelector(state => state.api.loading);
 
    useEffect(() => {
@@ -36,6 +37,8 @@ const App = () => {
          .then(data => {
             setCodeLists(data);
          });
+         
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
 
    useInterval(async () => {
@@ -43,7 +46,7 @@ const App = () => {
    }, SAVE_DOC_INTVAL_SEC * 1000);
 
    return (
-      <React.Fragment>
+      <ModalsProvider initialModals={modals}>
          {
             codeLists !== null ?
                <CodeListContext.Provider value={codeLists}>
@@ -98,8 +101,7 @@ const App = () => {
                </CodeListContext.Provider> :
                null
          }         
-         <Dialog />
-      </React.Fragment>
+      </ModalsProvider>
    );
 }
 
