@@ -1,5 +1,5 @@
 import Form from 'react-bootstrap/Form';
-import { TextEditor } from 'components/custom-elements';
+import { Calendar, TextEditor } from 'components/custom-elements';
 
 const Planhensikt = ({ state, onChange }) => {
    return (
@@ -26,22 +26,22 @@ const Planhensikt = ({ state, onChange }) => {
                </Form.Group>
             </div>
          </div>
+         <div className="row">
+            <div className="col-3">
+               <Form.Group>
+                  <Form.Label>Versjonsdato</Form.Label>
+                  <Calendar name="planhensikt.versjonsdato" value={state.planhensikt.versjonsdato} onChange={onChange} />
+               </Form.Group>
+            </div>
+            <div className="col-3">
+               <Form.Group>
+                  <Form.Label>Versjonsnummer</Form.Label>
+                  <Form.Control type="text" name="planhensikt.versjonsnummer" value={state.planhensikt.versjonsnummer || ''} onChange={onChange} />
+               </Form.Group>
+            </div>
+         </div>
          {
             /*<div className="row">
-               <div className="col-3">
-                  <Form.Group>
-                     <Form.Label>Versjonsdato</Form.Label>
-                     <Calendar name="planhensikt.versjonsdato" value={state.planhensikt.versjonsdato} onChange={onChange} />
-                  </Form.Group>
-               </div>
-               <div className="col-3">
-                  <Form.Group>
-                     <Form.Label>Versjonsnummer</Form.Label>
-                     <Form.Control type="text" name="planhensikt.versjonsnummer" value={state.planhensikt.versjonsnummer || ''} onChange={onChange} />
-                  </Form.Group>
-               </div>
-            </div>
-            <div className="row">
                <div className="col-6">
                   <Form.Group>
                      <Form.Label>Alternativ referanse</Form.Label>

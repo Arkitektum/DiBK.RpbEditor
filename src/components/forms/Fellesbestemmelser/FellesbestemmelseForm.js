@@ -1,4 +1,4 @@
-import { TextEditor } from 'components/custom-elements';
+import { Calendar, TextEditor } from 'components/custom-elements';
 import Form from 'react-bootstrap/Form';
 
 const FellesbestemmelseForm = ({ state, onChange }) => {
@@ -26,22 +26,22 @@ const FellesbestemmelseForm = ({ state, onChange }) => {
                </Form.Group>
             </div>
          </div>
+         <div className="row">
+            <div className="col-3">
+               <Form.Group>
+                  <Form.Label>Versjonsdato</Form.Label>
+                  <Calendar name="versjonsdato" value={state.versjonsdato} onChange={onChange} />
+               </Form.Group>
+            </div>
+            <div className="col-3">
+               <Form.Group>
+                  <Form.Label>Versjonsnummer</Form.Label>
+                  <Form.Control type="text" name="versjonsnummer" value={state.versjonsnummer || ''} onChange={onChange} />
+               </Form.Group>
+            </div>
+         </div>
          {
             /*<div className="row">
-               <div className="col-3">
-                  <Form.Group>
-                     <Form.Label>Versjonsdato</Form.Label>
-                     <Calendar name="versjonsdato" value={state.versjonsdato} onChange={onChange} />
-                  </Form.Group>
-               </div>
-               <div className="col-3">
-                  <Form.Group>
-                     <Form.Label>Versjonsnummer</Form.Label>
-                     <Form.Control type="text" name="versjonsnummer" value={state.versjonsnummer || ''} onChange={onChange} />
-                  </Form.Group>
-               </div>
-            </div>
-            <div className="row">
                <div className="col-6">
                   <Form.Group>
                      <Form.Label>Alternativ referanse</Form.Label>

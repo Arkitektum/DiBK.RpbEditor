@@ -1,5 +1,5 @@
 import Form from 'react-bootstrap/Form';
-import { SelectDropdown, Tags, TextEditor } from 'components/custom-elements';
+import { Calendar, SelectDropdown, Tags, TextEditor } from 'components/custom-elements';
 import { useContext } from 'react';
 import { CodeListContext } from 'App';
 
@@ -36,22 +36,22 @@ const HensynsbestemmelseForm = ({ state, onChange }) => {
                </Form.Group>
             </div>
          </div>
+         <div className="row">
+            <div className="col-3">
+               <Form.Group>
+                  <Form.Label>Versjonsdato</Form.Label>
+                  <Calendar name="versjonsdato" value={state.versjonsdato} onChange={onChange} />
+               </Form.Group>
+            </div>
+            <div className="col-3">
+               <Form.Group>
+                  <Form.Label>Versjonsnummer</Form.Label>
+                  <Form.Control type="text" name="versjonsnummer" value={state.versjonsnummer || ''} onChange={onChange} />
+               </Form.Group>
+            </div>
+         </div>
          {
             /*<div className="row">
-               <div className="col-3">
-                  <Form.Group>
-                     <Form.Label>Versjonsdato</Form.Label>
-                     <Calendar name="versjonsdato" value={state.versjonsdato} onChange={onChange} />
-                  </Form.Group>
-               </div>
-               <div className="col-3">
-                  <Form.Group>
-                     <Form.Label>Versjonsnummer</Form.Label>
-                     <Form.Control type="text" name="versjonsnummer" value={state.versjonsnummer || ''} onChange={onChange} />
-                  </Form.Group>
-               </div>
-            </div>
-            <div className="row">
                <div className="col-6">
                   <Form.Group>
                      <Form.Label>Alternativ referanse</Form.Label>
@@ -64,7 +64,7 @@ const HensynsbestemmelseForm = ({ state, onChange }) => {
             <div className="col-3">
                <Form.Group>
                   <Form.Label>Hensynskategori</Form.Label>
-                  <SelectDropdown name="hensynskategori" className="selectDropdown" options={hensynskategorier} value={state.hensynskategori.kodeverdi} onSelect={handleSelect} />                  
+                  <SelectDropdown name="hensynskategori" className="selectDropdown" options={hensynskategorier} value={state.hensynskategori.kodeverdi} onSelect={handleSelect} />
                </Form.Group>
             </div>
          </div>

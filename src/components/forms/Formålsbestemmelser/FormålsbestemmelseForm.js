@@ -1,6 +1,6 @@
 /*import { useContext } from 'react';
 import { CodeListContext } from 'App';*/
-import { /*SelectDropdown,*/ Tags, TextEditor } from 'components/custom-elements';
+import { /*SelectDropdown,*/ Calendar, Tags, TextEditor } from 'components/custom-elements';
 import Form from 'react-bootstrap/Form';
 
 const FormålsbestemmelseForm = ({ state, onChange }) => {
@@ -46,22 +46,22 @@ const FormålsbestemmelseForm = ({ state, onChange }) => {
                </Form.Group>
             </div>
          </div>
-         {
-            /*<div className="row">
-               <div className="col-3">
-                  <Form.Group>
-                     <Form.Label>Versjonsdato</Form.Label>
-                     <Calendar name="versjonsdato" value={state.versjonsdato} onChange={onChange} />
-                  </Form.Group>
-               </div>
-               <div className="col-3">
-                  <Form.Group>
-                     <Form.Label>Versjonsnummer</Form.Label>
-                     <Form.Control type="text" name="versjonsnummer" value={state.versjonsnummer || ''} onChange={onChange} />
-                  </Form.Group>
-               </div>
+         <div className="row">
+            <div className="col-3">
+               <Form.Group>
+                  <Form.Label>Versjonsdato</Form.Label>
+                  <Calendar name="versjonsdato" value={state.versjonsdato} onChange={onChange} />
+               </Form.Group>
             </div>
-            <div className="row">
+            <div className="col-3">
+               <Form.Group>
+                  <Form.Label>Versjonsnummer</Form.Label>
+                  <Form.Control type="text" name="versjonsnummer" value={state.versjonsnummer || ''} onChange={onChange} />
+               </Form.Group>
+            </div>
+         </div>
+         {
+            /* <div className="row">
                <div className="col-6">
                   <Form.Group>
                      <Form.Label>Alternativ referanse</Form.Label>

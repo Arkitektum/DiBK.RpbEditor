@@ -1,5 +1,5 @@
 import Form from 'react-bootstrap/Form';
-import { Tags, TextEditor } from 'components/custom-elements';
+import { Calendar, Tags, TextEditor } from 'components/custom-elements';
 
 const OmrådebestemmelseForm = ({ state, onChange }) => {
    return (
@@ -26,22 +26,22 @@ const OmrådebestemmelseForm = ({ state, onChange }) => {
                </Form.Group>
             </div>
          </div>
+         <div className="row">
+            <div className="col-3">
+               <Form.Group>
+                  <Form.Label>Versjonsdato</Form.Label>
+                  <Calendar name="versjonsdato" value={state.versjonsdato} onChange={onChange} />
+               </Form.Group>
+            </div>
+            <div className="col-3">
+               <Form.Group>
+                  <Form.Label>Versjonsnummer</Form.Label>
+                  <Form.Control type="text" name="versjonsnummer" value={state.versjonsnummer || ''} onChange={onChange} />
+               </Form.Group>
+            </div>
+         </div>
          {
             /*<div className="row">
-               <div className="col-3">
-                  <Form.Group>
-                     <Form.Label>Versjonsdato</Form.Label>
-                     <Calendar name="versjonsdato" value={state.versjonsdato} onChange={onChange} />
-                  </Form.Group>
-               </div>
-               <div className="col-3">
-                  <Form.Group>
-                     <Form.Label>Versjonsnummer</Form.Label>
-                     <Form.Control type="text" name="versjonsnummer" value={state.versjonsnummer || ''} onChange={onChange} />
-                  </Form.Group>
-               </div>
-            </div>
-            <div className="row">
                <div className="col-6">
                   <Form.Group>
                      <Form.Label>Alternativ referanse</Form.Label>

@@ -1,5 +1,5 @@
 import Form from 'react-bootstrap/Form';
-import { SelectDropdown } from 'components/custom-elements';
+import { Calendar, SelectDropdown } from 'components/custom-elements';
 import { useContext } from 'react';
 import { CodeListContext } from 'App';
 
@@ -52,22 +52,22 @@ const GenereltForm = ({ state, onChange }) => {
                </Form.Group>
             </div>
          </div>
+         <div className="row">
+            <div className="col-3">
+               <Form.Group>
+                  <Form.Label>Versjonsdato</Form.Label>
+                  <Calendar name="versjonsdato" value={state.versjonsdato} onChange={onChange} />
+               </Form.Group>
+            </div>
+            <div className="col-3">
+               <Form.Group>
+                  <Form.Label>Versjonsnummer</Form.Label>
+                  <Form.Control type="text" name="versjonsnummer" value={state.versjonsnummer || ''} onChange={onChange} />
+               </Form.Group>
+            </div>
+         </div>
          {
             /*<div className="row">
-               <div className="col-3">
-                  <Form.Group>
-                     <Form.Label>Versjonsdato</Form.Label>
-                     <Calendar name="versjonsdato" value={state.versjonsdato} onChange={onChange} />
-                  </Form.Group>
-               </div>
-               <div className="col-3">
-                  <Form.Group>
-                     <Form.Label>Versjonsnummer</Form.Label>
-                     <Form.Control type="text" name="versjonsnummer" value={state.versjonsnummer || ''} onChange={onChange} />
-                  </Form.Group>
-               </div>
-            </div>
-            <div className="row">
                <div className="col-6">
                   <Form.Group>
                      <Form.Label>Alternativ referanse</Form.Label>
